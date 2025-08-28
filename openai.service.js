@@ -12,9 +12,9 @@ const createAssistant = async (openai) => {
         });
         const assistant = await openai.beta.assistants.create({
             name: "Chat Demo",
-            instructions: fs.readFileSync("instructions.txt", "utf-8"),
+            instructions: fs.readFileSync("instructions.txt", "utf-8"),  // Give insructions (system prompt)
             tools: [{ type: "file_search" }],
-            tool_resources: { file_search: { vector_store_ids: [vectorStore.id] } },
+            tool_resources: { file_search: { vector_store_ids: [vectorStore.id] } }, // Vector store so to use the knowledge base
             model: "gpt-4o",
         });
         fs.writeFileSync(assistantFilePath, JSON.stringify(assistant));
